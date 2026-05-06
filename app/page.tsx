@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Contentor } from '@/lib/types'
 import Estatisticas from '@/components/Estatisticas'
 import dynamic from 'next/dynamic'
+import Rota from '@/components/Rota'
 
 // Carregar o mapa dinamicamente (apenas no browser)
 const Mapa = dynamic(() => import('@/components/Mapa'), { ssr: false })
@@ -203,6 +204,7 @@ export default function Dashboard() {
                 </table>
               </div>
             )}
+   <Rota />
           </>
         )}
       </div>
