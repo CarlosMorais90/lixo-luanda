@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/lib/auth'
 
@@ -15,20 +15,27 @@ export default function ProtegerPagina({
 }: ProtegerPaginaProps) {
   const { utilizador, perfil, carregando } = useAuth()
   const router = useRouter()
+  const [verificado, setVerificado] = useState(false)
 
   useEffect(() => {
-    if (!carregando) {
+    if (carregando) return
+
+    const timer = setTimeout(() => {
       if (!utilizador) {
         router.push('/login')
         return
       }
       if (perfil && !perfisPermitidos.includes(perfil.perfil)) {
         router.push('/login')
+        return
       }
-    }
+      setVerificado(true)
+    }, 500)
+
+    return () => clearTimeout(timer)
   }, [utilizador, perfil, carregando])
 
-  if (carregando) {
+  if (carregando || !verificado) {
     return (
       <div style={{
         minHeight: '100vh',
@@ -46,9 +53,15 @@ export default function ProtegerPagina({
     )
   }
 
-  if (!utilizador || !perfil) return null
+  if (!utilizador || !perfil) {
+    router.push('/login')
+    return null
+  }
 
-  if (!perfisPermitidos.includes(perfil.perfil)) return null
+  if (!perfisPermitidos.includes(perfil.perfil)) {
+    router.push('/login')
+    return null
+  }
 
   return <>{children}</>
 }
