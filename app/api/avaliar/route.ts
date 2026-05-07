@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       )
     }
 
-    // Buscar a rota original na base de dados
+    // Buscar a rota original
     const { data: rota, error: rotaError } = await supabase
       .from('rotas')
       .select('*')
@@ -23,48 +23,44 @@ export async function POST(request: Request) {
 
     if (rotaError) throw rotaError
 
-    // Groq avalia o desempenho do camionista
+    // Groq avalia o desempenho
     const resposta = await groq.chat.completions.create({
-      model: 'llama3-8b-8192',
+      model: 'llama-3.1-8b-instant',
       messages: [
         {
           role: 'system',
-          content: `És um sistema de avaliação de desempenho de camionistas de recolha de lixo 
-          em Luanda, Angola. Analisa os dados e gera um relatório justo e construtivo.
-          Responde SEMPRE apenas com JSON válido, sem texto adicional.`
+          content: `És um sistema de avaliação de desempenho de camionistas de recolha de lixo em Luanda, Angola. Responde SEMPRE apenas com JSON válido, sem texto adicional.`
         },
         {
           role: 'user',
           content: `Avalia o desempenho deste camionista:
-          
-          Rota planeada: ${JSON.stringify(rota.rota_optimizada)}
           Distância estimada: ${rota.distancia_total} km
           Contentores recolhidos: ${contentores_recolhidos}
           Tempo real gasto: ${tempo_real_minutos} minutos
           
-          Responde APENAS com este JSON exacto:
+          Responde APENAS com este JSON:
           {
             "pontuacao": número entre 0 e 100,
-            "contentores_recolhidos": número,
-            "contentores_total": número,
-            "tempo_real_minutos": número,
-            "eficiencia_percentagem": número,
+            "contentores_recolhidos": ${contentores_recolhidos},
+            "contentores_total": ${contentores_recolhidos},
+            "tempo_real_minutos": ${tempo_real_minutos},
+            "eficiencia_percentagem": número entre 0 e 100,
             "pontos_fortes": "o que o camionista fez bem",
             "pontos_melhoria": "o que pode melhorar",
-            "mensagem_chefe": "resumo executivo para o chefe da empresa"
+            "mensagem_chefe": "resumo executivo para o chefe"
           }`
         }
       ],
       max_tokens: 500
     })
 
-    // Extrair o JSON da resposta
+    // Extrair JSON da resposta
     const textoResposta = resposta.choices[0].message.content || ''
     const jsonMatch = textoResposta.match(/\{[\s\S]*\}/)
     if (!jsonMatch) throw new Error('Resposta inválida do Groq')
     const avaliacao = JSON.parse(jsonMatch[0])
 
-    // Actualizar a rota com a avaliação e marcar como concluída
+    // Actualizar a rota com a avaliação
     const { error: updateError } = await supabase
       .from('rotas')
       .update({
@@ -79,11 +75,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       sucesso: true,
       avaliacao,
-      mensagem: 'Relatório enviado ao chefe com sucesso'
+      mensagem: 'Relatório enviado com sucesso'
     })
   } catch (error) {
     return NextResponse.json(
-      { sucesso: false, erro: 'Erro ao avaliar desempenho' },
+      { sucesso: false, erro: 'Erro ao avaliar desempenho', detalhe: String(error) },
       { status: 500 }
     )
   }
