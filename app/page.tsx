@@ -1,5 +1,7 @@
 'use client'
 
+import ProtegerPagina from '@/components/ProtegerPagina'
+import { useAuth } from '@/lib/auth'
 import { useEffect, useState } from 'react'
 import { Contentor } from '@/lib/types'
 import Estatisticas from '@/components/Estatisticas'
@@ -39,6 +41,7 @@ export default function Dashboard() {
   }, [])
 
   return (
+    <ProtegerPagina perfisPermitidos={['gestor', 'chefe']}>
     <main style={{
       minHeight: '100vh',
       background: '#f8fafc',
@@ -209,5 +212,6 @@ export default function Dashboard() {
         )}
       </div>
     </main>
+    </ProtegerPagina>
   )
 }

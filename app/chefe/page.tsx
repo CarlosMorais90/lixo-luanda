@@ -1,5 +1,6 @@
 'use client'
 
+import ProtegerPagina from '@/components/ProtegerPagina'
 import { useEffect, useState } from 'react'
 
 interface Avaliacao {
@@ -91,7 +92,8 @@ export default function PaginaChefe() {
         .reduce((acc, r) => acc + (r.avaliacao_groq?.pontuacao || 0), 0) / rotasAvaliadas)
     : 0
 
-  return (
+ return (
+    <ProtegerPagina perfisPermitidos={['chefe', 'gestor']}>
     <main style={{
       minHeight: '100vh',
       background: '#f1f5f9',
@@ -374,6 +376,7 @@ export default function PaginaChefe() {
           )
         })}
       </div>
-    </main>
+   </main>
+    </ProtegerPagina>
   )
 }
