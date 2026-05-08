@@ -1,5 +1,6 @@
 'use client'
 
+import { notificarAvaliacaoPronta } from '@/lib/notificacoes'
 import ProtegerPagina from '@/components/ProtegerPagina'
 import { useEffect, useState } from 'react'
 
@@ -65,6 +66,13 @@ export default function PaginaChefe() {
       const dados = await resposta.json()
       if (dados.sucesso) {
         await buscarRotas()
+
+        // Notificar o chefe por email
+        await notificarAvaliacaoPronta(
+          'carlosmorais939605674@gmail.com',
+          dados.avaliacao?.pontuacao || 0,
+          dados.avaliacao?.eficiencia_percentagem || 0
+        )
       }
     } catch (e) {
       alert('Erro ao avaliar rota')

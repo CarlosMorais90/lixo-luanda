@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { notificarRotaCamionista } from '@/lib/notificacoes'
 
 interface ParagemRota {
   ordem: number
@@ -24,11 +25,13 @@ export default function Rota() {
   const [rota, setRota] = useState<DadosRota | null>(null)
   const [carregando, setCarregando] = useState(false)
   const [erro, setErro] = useState<string | null>(null)
+  const [emailEnviado, setEmailEnviado] = useState(false)
 
   const calcularRota = async () => {
     setCarregando(true)
     setErro(null)
     setRota(null)
+    setEmailEnviado(false)
 
     try {
       const resposta = await fetch('/api/rota')
@@ -45,6 +48,16 @@ export default function Rota() {
       }
 
       setRota(dados)
+
+      // Notificar o camionista por email
+      const enviado = await notificarRotaCamionista(
+        'camionista@lixoluanda.ao',
+        'Camionista',
+        dados.rota_optimizada?.length || 0,
+        dados.distancia_total_km || 0
+      )
+      setEmailEnviado(enviado)
+
     } catch (e) {
       setErro('Erro de ligação ao servidor')
     } finally {
@@ -87,6 +100,21 @@ export default function Rota() {
           {carregando ? '⏳ A calcular...' : '🧠 Calcular Rota com IA'}
         </button>
       </div>
+
+      {/* Notificação email enviado */}
+      {emailEnviado && (
+        <div style={{
+          background: '#f0fdf4',
+          border: '1px solid #86efac',
+          borderRadius: '8px',
+          padding: '10px 16px',
+          color: '#15803d',
+          fontSize: '13px',
+          marginBottom: '16px'
+        }}>
+          📧 Email enviado ao camionista com os detalhes da rota
+        </div>
+      )}
 
       {/* Erro */}
       {erro && (
@@ -182,70 +210,17 @@ export default function Rota() {
                     ? '1px solid #f1f5f9' : 'none'
                 }}
               >
-                {/* Número da ordem */}
                 <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  background: '#1e40af',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: '700',
-                  fontSize: '16px',
-                  flexShrink: 0
+                  width: '36px', height: '36px',
+                  borderRadius: '50%', background: '#1e40af',
+                  color: 'white', display: 'flex',
+                  alignItems: 'center', justifyContent: 'center',
+                  fontWeight: '700', fontSize: '16px', flexShrink: 0
                 }}>
                   {paragem.ordem}
                 </div>
-
-                {/* Detalhes */}
                 <div style={{ flex: 1 }}>
-                  <div style={{
-                    fontWeight: '600',
-                    color: '#1e293b',
-                    fontSize: '15px'
-                  }}>
+                  <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '15px' }}>
                     {paragem.nome}
                   </div>
-                  <div style={{
-                    fontSize: '13px',
-                    color: '#64748b',
-                    marginTop: '2px'
-                  }}>
-                    {paragem.motivo}
-                  </div>
-                </div>
-
-                {/* Estado */}
-                <span style={{
-                  background: paragem.estado === 'cheio' ? '#fef2f2' : '#fff7ed',
-                  color: paragem.estado === 'cheio' ? '#dc2626' : '#ea580c',
-                  padding: '4px 10px',
-                  borderRadius: '20px',
-                  fontSize: '12px',
-                  fontWeight: '500',
-                  flexShrink: 0
-                }}>
-                  {paragem.estado === 'cheio' ? '🔴 Cheio' : '🟠 Quase cheio'}
-                </span>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-
-      {/* Estado inicial */}
-      {!rota && !carregando && !erro && (
-        <div style={{
-          textAlign: 'center',
-          padding: '40px',
-          color: '#94a3b8',
-          fontSize: '14px'
-        }}>
-          Clique em "Calcular Rota com IA" para o Groq optimizar a rota de recolha
-        </div>
-      )}
-    </div>
-  )
-}
+                  <div style={{ fontSize: '13px', color: '#64748b', marginTop: '2px' }}>
