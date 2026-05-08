@@ -49,7 +49,6 @@ export default function Rota() {
 
       setRota(dados)
 
-      // Notificar o camionista por email
       const enviado = await notificarRotaCamionista(
         'camionista@lixoluanda.ao',
         'Camionista',
@@ -73,7 +72,6 @@ export default function Rota() {
       boxShadow: '0 1px 4px rgba(0,0,0,0.08)',
       marginTop: '24px'
     }}>
-      {/* Cabeçalho */}
       <div style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -101,7 +99,6 @@ export default function Rota() {
         </button>
       </div>
 
-      {/* Notificação email enviado */}
       {emailEnviado && (
         <div style={{
           background: '#f0fdf4',
@@ -116,7 +113,6 @@ export default function Rota() {
         </div>
       )}
 
-      {/* Erro */}
       {erro && (
         <div style={{
           background: '#fef9c3',
@@ -130,58 +126,34 @@ export default function Rota() {
         </div>
       )}
 
-      {/* Resultado da rota */}
       {rota && (
         <>
-          {/* Resumo */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
             gap: '12px',
             marginBottom: '20px'
           }}>
-            <div style={{
-              background: '#f0fdf4',
-              borderRadius: '10px',
-              padding: '16px',
-              textAlign: 'center'
-            }}>
+            <div style={{ background: '#f0fdf4', borderRadius: '10px', padding: '16px', textAlign: 'center' }}>
               <div style={{ fontSize: '24px', fontWeight: '700', color: '#16a34a' }}>
                 {rota.distancia_total_km} km
               </div>
-              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>
-                Distância total
-              </div>
+              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Distância total</div>
             </div>
-            <div style={{
-              background: '#eff6ff',
-              borderRadius: '10px',
-              padding: '16px',
-              textAlign: 'center'
-            }}>
+            <div style={{ background: '#eff6ff', borderRadius: '10px', padding: '16px', textAlign: 'center' }}>
               <div style={{ fontSize: '24px', fontWeight: '700', color: '#1e40af' }}>
                 {rota.tempo_estimado_minutos} min
               </div>
-              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>
-                Tempo estimado
-              </div>
+              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Tempo estimado</div>
             </div>
-            <div style={{
-              background: '#fef2f2',
-              borderRadius: '10px',
-              padding: '16px',
-              textAlign: 'center'
-            }}>
+            <div style={{ background: '#fef2f2', borderRadius: '10px', padding: '16px', textAlign: 'center' }}>
               <div style={{ fontSize: '24px', fontWeight: '700', color: '#dc2626' }}>
                 {rota.rota_optimizada?.length || 0}
               </div>
-              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>
-                Paragens
-              </div>
+              <div style={{ fontSize: '12px', color: '#64748b', marginTop: '4px' }}>Paragens</div>
             </div>
           </div>
 
-          {/* Observações do Groq */}
           {rota.observacoes && (
             <div style={{
               background: '#f8fafc',
@@ -196,7 +168,6 @@ export default function Rota() {
             </div>
           )}
 
-          {/* Lista de paragens */}
           <div>
             {rota.rota_optimizada?.map((paragem, index) => (
               <div
@@ -206,14 +177,12 @@ export default function Rota() {
                   alignItems: 'flex-start',
                   gap: '16px',
                   padding: '14px 0',
-                  borderBottom: index < rota.rota_optimizada.length - 1
-                    ? '1px solid #f1f5f9' : 'none'
+                  borderBottom: index < rota.rota_optimizada.length - 1 ? '1px solid #f1f5f9' : 'none'
                 }}
               >
                 <div style={{
-                  width: '36px', height: '36px',
-                  borderRadius: '50%', background: '#1e40af',
-                  color: 'white', display: 'flex',
+                  width: '36px', height: '36px', borderRadius: '50%',
+                  background: '#1e40af', color: 'white', display: 'flex',
                   alignItems: 'center', justifyContent: 'center',
                   fontWeight: '700', fontSize: '16px', flexShrink: 0
                 }}>
@@ -223,4 +192,4 @@ export default function Rota() {
                   <div style={{ fontWeight: '600', color: '#1e293b', fontSize: '15px' }}>
                     {paragem.nome}
                   </div>
-                  <div style={{ fontSize: '13px', color: '#64748b', marginTop: '2px' }}>
+                  <div style={{ fontSize: '13px', color: '#64748b',
