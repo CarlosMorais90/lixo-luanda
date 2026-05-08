@@ -9,33 +9,33 @@ interface ProtegerPaginaProps {
   perfisPermitidos: ('gestor' | 'chefe' | 'camionista' | 'operador')[]
 }
 
-export default function ProtegerPagina({
-  children,
-  perfisPermitidos
-}: ProtegerPaginaProps) {
+export default function ProtegerPagina({ children, perfisPermitidos }: ProtegerPaginaProps) {
   const { utilizador, perfil, carregando } = useAuth()
   const router = useRouter()
-  const [verificado, setVerificado] = useState(false)
+  const [pronto, setPronto] = useState(false)
 
   useEffect(() => {
-    if (carregando) return
-
     const timer = setTimeout(() => {
       if (!utilizador) {
         router.push('/login')
         return
       }
-      if (perfil && !perfisPermitidos.includes(perfil.perfil)) {
+      setPronto(true)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [utilizador, carregando])
+
+  useEffect(() => {
+    if (!carregando && utilizador && perfil) {
+      if (!perfisPermitidos.includes(perfil.perfil)) {
         router.push('/login')
         return
       }
-      setVerificado(true)
-    }, 500)
+      setPronto(true)
+    }
+  }, [carregando, utilizador, perfil])
 
-    return () => clearTimeout(timer)
-  }, [utilizador, perfil, carregando])
-
-  if (carregando || !verificado) {
+  if (!pronto) {
     return (
       <div style={{
         minHeight: '100vh',
@@ -51,16 +51,6 @@ export default function ProtegerPagina({
         </div>
       </div>
     )
-  }
-
-  if (!utilizador || !perfil) {
-    router.push('/login')
-    return null
-  }
-
-  if (!perfisPermitidos.includes(perfil.perfil)) {
-    router.push('/login')
-    return null
   }
 
   return <>{children}</>
