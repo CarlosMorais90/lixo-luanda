@@ -2,51 +2,50 @@
 
 import { useState } from 'react'
 import { createSupabaseBrowser } from '@/lib/supabase'
-import { useRouter } from 'next/navigation'
 
 export default function PaginaLogin() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [carregando, setCarregando] = useState(false)
   const [erro, setErro] = useState<string | null>(null)
-  const supabase = createSupabaseBrowser()
-  const router = useRouter()
 
   const entrar = async () => {
     setCarregando(true)
     setErro(null)
 
     try {
+      const supabase = createSupabaseBrowser()
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password
       })
 
       if (error) {
-        setErro('Email ou password incorrectos. Tente novamente.')
+        setErro('Email ou password incorrectos.')
+        setCarregando(false)
         return
       }
 
-      // Buscar o perfil do utilizador
+      // Buscar perfil
       const { data: perfil } = await supabase
         .from('perfis')
         .select('perfil')
         .eq('id', data.user.id)
         .single()
 
-      // Redirecionar conforme o perfil
+      // Redirecionar
       if (perfil?.perfil === 'camionista') {
-        router.push('/camionista')
+        window.location.href = '/camionista'
       } else if (perfil?.perfil === 'operador') {
-        router.push('/operador')
+        window.location.href = '/operador'
       } else if (perfil?.perfil === 'chefe') {
-        router.push('/chefe')
+        window.location.href = '/chefe'
       } else {
-        router.push('/')
+        window.location.href = '/'
       }
     } catch (e) {
-      setErro('Erro ao fazer login. Tente novamente.')
-    } finally {
+      setErro('Erro ao fazer login.')
       setCarregando(false)
     }
   }
@@ -69,45 +68,28 @@ export default function PaginaLogin() {
         maxWidth: '420px',
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
-        {/* Logo e título */}
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <div style={{ fontSize: '48px', marginBottom: '12px' }}>🗺️</div>
-          <h1 style={{
-            margin: 0, fontSize: '22px',
-            fontWeight: '700', color: '#1e293b'
-          }}>
+          <h1 style={{ margin: 0, fontSize: '22px', fontWeight: '700', color: '#1e293b' }}>
             Recolha de Lixo — Luanda
           </h1>
-          <p style={{
-            margin: '8px 0 0', fontSize: '14px',
-            color: '#64748b'
-          }}>
+          <p style={{ margin: '8px 0 0', fontSize: '14px', color: '#64748b' }}>
             Entre na sua conta para continuar
           </p>
         </div>
 
-        {/* Erro */}
         {erro && (
           <div style={{
-            background: '#fef2f2',
-            border: '1px solid #fecaca',
-            borderRadius: '8px',
-            padding: '12px 16px',
-            color: '#dc2626',
-            fontSize: '14px',
-            marginBottom: '20px'
+            background: '#fef2f2', border: '1px solid #fecaca',
+            borderRadius: '8px', padding: '12px 16px',
+            color: '#dc2626', fontSize: '14px', marginBottom: '20px'
           }}>
             ❌ {erro}
           </div>
         )}
 
-        {/* Email */}
         <div style={{ marginBottom: '16px' }}>
-          <label style={{
-            display: 'block', fontSize: '14px',
-            fontWeight: '500', color: '#374151',
-            marginBottom: '6px'
-          }}>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
             Email
           </label>
           <input
@@ -115,25 +97,12 @@ export default function PaginaLogin() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="exemplo@gmail.com"
-            style={{
-              width: '100%',
-              padding: '12px 16px',
-              borderRadius: '8px',
-              border: '1px solid #d1d5db',
-              fontSize: '15px',
-              outline: 'none',
-              boxSizing: 'border-box'
-            }}
+            style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }}
           />
         </div>
 
-        {/* Password */}
         <div style={{ marginBottom: '24px' }}>
-          <label style={{
-            display: 'block', fontSize: '14px',
-            fontWeight: '500', color: '#374151',
-            marginBottom: '6px'
-          }}>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
             Password
           </label>
           <input
@@ -142,42 +111,25 @@ export default function PaginaLogin() {
             onChange={e => setPassword(e.target.value)}
             placeholder="••••••••"
             onKeyDown={e => e.key === 'Enter' && entrar()}
-            style={{
-              width: '100%',
-              padding: '12px 16px',
-              borderRadius: '8px',
-              border: '1px solid #d1d5db',
-              fontSize: '15px',
-              outline: 'none',
-              boxSizing: 'border-box'
-            }}
+            style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }}
           />
         </div>
 
-        {/* Botão entrar */}
         <button
           onClick={entrar}
           disabled={carregando || !email || !password}
           style={{
             width: '100%',
             background: carregando || !email || !password ? '#94a3b8' : '#1e40af',
-            color: 'white',
-            border: 'none',
-            borderRadius: '10px',
-            padding: '14px',
-            fontSize: '16px',
-            fontWeight: '700',
+            color: 'white', border: 'none', borderRadius: '10px',
+            padding: '14px', fontSize: '16px', fontWeight: '700',
             cursor: carregando || !email || !password ? 'not-allowed' : 'pointer'
           }}
         >
           {carregando ? '⏳ A entrar...' : '🔐 Entrar'}
         </button>
 
-        {/* Rodapé */}
-        <p style={{
-          textAlign: 'center', marginTop: '24px',
-          fontSize: '12px', color: '#94a3b8'
-        }}>
+        <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '12px', color: '#94a3b8' }}>
           Sistema de Gestão Municipal — Luanda, Angola
         </p>
       </div>
