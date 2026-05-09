@@ -124,6 +124,11 @@ export default function PaginaOperador() {
         margin: '0 auto'
       }}>
         {/* Cabeçalho */}
+        <nav style={{ background: '#92400e', padding: '10px 20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📊 Dashboard</a>
+        <a href="/camionista" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>🚛 Camionista</a>
+        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📋 Chefe</a>
+      </nav>
         <header style={{
           background: '#d97706',
           color: 'white',

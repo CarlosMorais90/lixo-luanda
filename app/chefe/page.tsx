@@ -108,6 +108,12 @@ export default function PaginaChefe() {
       fontFamily: 'system-ui, sans-serif'
     }}>
       {/* Cabeçalho */}
+      <nav style={{ background: '#0f172a', padding: '10px 32px', display: 'flex', gap: '12px' }}>
+        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📊 Dashboard</a>
+        <a href="/operador" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📷 Operador</a>
+        <a href="/camionista" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>🚛 Camionista</a>
+        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📋 Chefe</a>
+      </nav>
       <header style={{
         background: '#1e293b',
         color: 'white',

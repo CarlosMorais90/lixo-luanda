@@ -88,6 +88,11 @@ export default function PaginaCamionista() {
       margin: '0 auto'
     }}>
       {/* Cabeçalho */}
+      <nav style={{ background: '#14532d', padding: '10px 20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📊 Dashboard</a>
+        <a href="/operador" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📷 Operador</a>
+        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📋 Chefe</a>
+      </nav>
       <header style={{
         background: '#15803d',
         color: 'white',
