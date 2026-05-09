@@ -1,5 +1,6 @@
 'use client'
 
+import Cabecalho from '@/components/Cabecalho'
 import ProtegerPagina from '@/components/ProtegerPagina'
 import { useAuth } from '@/lib/auth'
 import { useEffect, useState } from 'react'
@@ -41,35 +42,13 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <ProtegerPagina perfisPermitidos={['gestor', 'chefe']}>
+    <>
     <main style={{
       minHeight: '100vh',
       background: '#f8fafc',
       fontFamily: 'system-ui, sans-serif'
     }}>
-      {/* Cabeçalho */}
-      <header style={{
-        background: '#1e40af',
-        color: 'white',
-        padding: '16px 32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
-      }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '22px', fontWeight: '700' }}>
-            🗺️ Sistema de Recolha de Lixo — Luanda
-          </h1>
-          <p style={{ margin: '4px 0 0', fontSize: '13px', opacity: 0.8 }}>
-            Dashboard de gestão municipal
-          </p>
-        </div>
-        <div style={{ textAlign: 'right', fontSize: '13px', opacity: 0.8 }}>
-          <div>Última actualização</div>
-          <div style={{ fontWeight: '600' }}>{ultimaActualizacao || '...'}</div>
-        </div>
-      </header>
+      <Cabecalho />
 
       {/* Conteúdo principal */}
       <div style={{ padding: '32px', maxWidth: '1200px', margin: '0 auto' }}>
@@ -212,6 +191,6 @@ export default function Dashboard() {
         )}
       </div>
     </main>
-    </ProtegerPagina>
+    </>
   )
 }
