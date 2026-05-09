@@ -79,7 +79,7 @@ export default function PaginaCamionista() {
     : 0
 
   return (
-    <ProtegerPagina perfisPermitidos={['camionista', 'gestor', 'chefe']}>
+    <>
     <main style={{
       minHeight: '100vh',
       background: '#f1f5f9',
@@ -364,6 +364,6 @@ export default function PaginaCamionista() {
         )}
       </div>
    </main>
-    </ProtegerPagina>
+    </>
   )
 }
