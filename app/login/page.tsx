@@ -25,10 +25,13 @@ export default function PaginaLogin() {
         .select('perfil')
         .eq('id', data.user.id)
         .single()
-      if (perfil?.perfil === 'camionista') window.location.replace('/camionista')
-      else if (perfil?.perfil === 'operador') window.location.replace('/operador')
-      else if (perfil?.perfil === 'chefe') window.location.replace('/chefe')
-      else window.location.replace('/')
+
+      const destino = perfil?.perfil === 'camionista' ? '/camionista'
+        : perfil?.perfil === 'operador' ? '/operador'
+        : perfil?.perfil === 'chefe' ? '/chefe'
+        : '/'
+
+     window.location.href = `/api/auth/callback?perfil=${perfil?.perfil || 'gestor'}`
     } catch (e) {
       setErro('Erro ao fazer login.')
       setCarregando(false)
@@ -53,32 +56,25 @@ export default function PaginaLogin() {
         boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
       }}>
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-          <div style={{ fontSize: '48px', marginBottom: '12px' }}>🗺️</div>
-          <h1 style={{ margin: 0, fontSize: '22px', fontWeight: '700', color: '#1e293b' }}>
-            Luanda Limpa— Luanda
+          <div style={{ fontSize: '48px', marginBottom: '12px' }}>🌿</div>
+          <h1 style={{ margin: 0, fontSize: '24px', fontWeight: '700', color: '#1e293b' }}>
+            Luanda Limpa
           </h1>
           <p style={{ margin: '8px 0 0', fontSize: '14px', color: '#64748b' }}>
-            Entre na sua conta para continuar
+            Gestão inteligente de resíduos urbanos
           </p>
         </div>
         {erro && (
           <div style={{
-            background: '#fef2f2',
-            border: '1px solid #fecaca',
-            borderRadius: '8px',
-            padding: '12px 16px',
-            color: '#dc2626',
-            fontSize: '14px',
-            marginBottom: '20px'
+            background: '#fef2f2', border: '1px solid #fecaca',
+            borderRadius: '8px', padding: '12px 16px',
+            color: '#dc2626', fontSize: '14px', marginBottom: '20px'
           }}>
             {erro}
           </div>
         )}
         <div style={{ marginBottom: '16px' }}>
-          <label style={{
-            display: 'block', fontSize: '14px',
-            fontWeight: '500', color: '#374151', marginBottom: '6px'
-          }}>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
             Email
           </label>
           <input
@@ -87,17 +83,14 @@ export default function PaginaLogin() {
             onChange={e => setEmail(e.target.value)}
             placeholder="exemplo@gmail.com"
             style={{
-              width: '100%', padding: '12px 16px',
-              borderRadius: '8px', border: '1px solid #d1d5db',
-              fontSize: '15px', outline: 'none', boxSizing: 'border-box'
+              width: '100%', padding: '12px 16px', borderRadius: '8px',
+              border: '1px solid #d1d5db', fontSize: '15px',
+              outline: 'none', boxSizing: 'border-box'
             }}
           />
         </div>
         <div style={{ marginBottom: '24px' }}>
-          <label style={{
-            display: 'block', fontSize: '14px',
-            fontWeight: '500', color: '#374151', marginBottom: '6px'
-          }}>
+          <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
             Password
           </label>
           <input
@@ -107,9 +100,9 @@ export default function PaginaLogin() {
             placeholder="••••••••"
             onKeyDown={e => e.key === 'Enter' && entrar()}
             style={{
-              width: '100%', padding: '12px 16px',
-              borderRadius: '8px', border: '1px solid #d1d5db',
-              fontSize: '15px', outline: 'none', boxSizing: 'border-box'
+              width: '100%', padding: '12px 16px', borderRadius: '8px',
+              border: '1px solid #d1d5db', fontSize: '15px',
+              outline: 'none', boxSizing: 'border-box'
             }}
           />
         </div>
