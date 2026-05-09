@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const body = await request.json()
     const { contentor_id, foto_base64, foto_url } = body
 
-    if (!contentor_id || (!foto_base64 && !foto_url)) {
+    if (!foto_base64 && !foto_url) {
       return NextResponse.json(
         { sucesso: false, erro: 'contentor_id e foto são obrigatórios' },
         { status: 400 }
