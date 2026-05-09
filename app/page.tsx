@@ -50,18 +50,7 @@ export default function Dashboard() {
     }}>
       <Cabecalho />
 
-      {/* Navegação */}
-      <nav style={{
-        background: '#1e293b',
-        padding: '12px 32px',
-        display: 'flex',
-        gap: '12px'
-      }}>
-        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '8px 16px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '14px' }}>📊 Dashboard</a>
-        <a href="/operador" style={{ color: 'white', textDecoration: 'none', padding: '8px 16px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '14px' }}>📷 Operador</a>
-        <a href="/camionista" style={{ color: 'white', textDecoration: 'none', padding: '8px 16px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '14px' }}>🚛 Camionista</a>
-        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '8px 16px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '14px' }}>📋 Chefe</a>
-      </nav>
+      
 
       {/* Conteúdo principal */}
       <div style={{ padding: '32px', maxWidth: '1200px', margin: '0 auto' }}>
