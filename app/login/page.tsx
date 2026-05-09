@@ -12,44 +12,28 @@ export default function PaginaLogin() {
   const entrar = async () => {
     setCarregando(true)
     setErro(null)
-
     try {
       const supabase = createSupabaseBrowser()
-
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password
-      })
-
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) {
         setErro('Email ou password incorrectos.')
         setCarregando(false)
         return
       }
-
-      // Buscar perfil
       const { data: perfil } = await supabase
         .from('perfis')
         .select('perfil')
         .eq('id', data.user.id)
         .single()
-
-      // Redirecionar
-      if (perfil?.perfil === 'camionista') {
-        window.location.href = '/camionista'
-      } else if (perfil?.perfil === 'operador') {
-        window.location.href = '/operador'
-      } else if (perfil?.perfil === 'chefe') {
-        window.location.href = '/chefe'
-      } else {
-        window.location.href = '/'
-      }
+      if (perfil?.perfil === 'camionista') window.location.replace('/camionista')
+      else if (perfil?.perfil === 'operador') window.location.replace('/operador')
+      else if (perfil?.perfil === 'chefe') window.location.replace('/chefe')
+      else window.location.replace('/')
     } catch (e) {
       setErro('Erro ao fazer login.')
       setCarregando(false)
     }
   }
-
   return (
     <main style={{
       minHeight: '100vh',
@@ -77,19 +61,24 @@ export default function PaginaLogin() {
             Entre na sua conta para continuar
           </p>
         </div>
-
         {erro && (
           <div style={{
-            background: '#fef2f2', border: '1px solid #fecaca',
-            borderRadius: '8px', padding: '12px 16px',
-            color: '#dc2626', fontSize: '14px', marginBottom: '20px'
+            background: '#fef2f2',
+            border: '1px solid #fecaca',
+            borderRadius: '8px',
+            padding: '12px 16px',
+            color: '#dc2626',
+            fontSize: '14px',
+            marginBottom: '20px'
           }}>
-            ❌ {erro}
+            {erro}
           </div>
         )}
-
         <div style={{ marginBottom: '16px' }}>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+          <label style={{
+            display: 'block', fontSize: '14px',
+            fontWeight: '500', color: '#374151', marginBottom: '6px'
+          }}>
             Email
           </label>
           <input
@@ -97,12 +86,18 @@ export default function PaginaLogin() {
             value={email}
             onChange={e => setEmail(e.target.value)}
             placeholder="exemplo@gmail.com"
-            style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }}
+            style={{
+              width: '100%', padding: '12px 16px',
+              borderRadius: '8px', border: '1px solid #d1d5db',
+              fontSize: '15px', outline: 'none', boxSizing: 'border-box'
+            }}
           />
         </div>
-
         <div style={{ marginBottom: '24px' }}>
-          <label style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>
+          <label style={{
+            display: 'block', fontSize: '14px',
+            fontWeight: '500', color: '#374151', marginBottom: '6px'
+          }}>
             Password
           </label>
           <input
@@ -111,10 +106,13 @@ export default function PaginaLogin() {
             onChange={e => setPassword(e.target.value)}
             placeholder="••••••••"
             onKeyDown={e => e.key === 'Enter' && entrar()}
-            style={{ width: '100%', padding: '12px 16px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '15px', outline: 'none', boxSizing: 'border-box' }}
+            style={{
+              width: '100%', padding: '12px 16px',
+              borderRadius: '8px', border: '1px solid #d1d5db',
+              fontSize: '15px', outline: 'none', boxSizing: 'border-box'
+            }}
           />
         </div>
-
         <button
           onClick={entrar}
           disabled={carregando || !email || !password}
@@ -126,10 +124,12 @@ export default function PaginaLogin() {
             cursor: carregando || !email || !password ? 'not-allowed' : 'pointer'
           }}
         >
-          {carregando ? '⏳ A entrar...' : '🔐 Entrar'}
+          {carregando ? 'A entrar...' : 'Entrar'}
         </button>
-
-        <p style={{ textAlign: 'center', marginTop: '24px', fontSize: '12px', color: '#94a3b8' }}>
+        <p style={{
+          textAlign: 'center', marginTop: '24px',
+          fontSize: '12px', color: '#94a3b8'
+        }}>
           Sistema de Gestão Municipal — Luanda, Angola
         </p>
       </div>
