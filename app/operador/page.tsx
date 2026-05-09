@@ -22,7 +22,6 @@ interface ResultadoAnalise {
 
 export default function PaginaOperador() {
   const [contentores, setContentores] = useState<Contentor[]>([])
-  const [contentorSeleccionado, setContentorSeleccionado] = useState<string>('')
   const [foto, setFoto] = useState<File | null>(null)
   const [previewFoto, setPreviewFoto] = useState<string | null>(null)
   const [analisando, setAnalisando] = useState(false)
@@ -35,10 +34,7 @@ export default function PaginaOperador() {
   const inputFotoRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    fetch('/api/contentores')
-      .then(res => res.json())
-      .then(dados => { if (dados.sucesso) setContentores(dados.dados) })
-
+   
     const actualizarHora = () => {
       setDataHora(new Date().toLocaleString('pt-PT', {
         day: '2-digit', month: '2-digit', year: 'numeric',
@@ -60,7 +56,7 @@ export default function PaginaOperador() {
   }
 
   const analisarFoto = async () => {
-    if (!foto || !contentorSeleccionado || !municipio || !bairro || !rua) {
+    if (!foto || !municipio || !bairro || !rua) {
       setErro('Preencha todos os campos e tire uma foto antes de analisar')
       return
     }
@@ -80,7 +76,7 @@ export default function PaginaOperador() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          contentor_id: contentorSeleccionado,
+          contentor_id: null,
           foto_base64: base64,
           localizacao: { municipio, bairro, rua },
           data_hora: dataHora
@@ -124,23 +120,12 @@ export default function PaginaOperador() {
           <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#1e293b', marginBottom: '10px' }}>
             📍 Localização do contentor
           </label>
-          <select value={municipio} onChange={e => setMunicipio(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', background: 'white', marginBottom: '8px', boxSizing: 'border-box' }}>
+          <select value={municipio} onChange={e => setMunicipio(e.target.value)} style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid #e2e8f0', fontSize: '15px', background: 'white', marginBottom: '10px', boxSizing: 'border-box', color: '#1e293b', fontWeight: '500' }}> fontSize: '14px', background: 'white', marginBottom: '8px', boxSizing: 'border-box' }}>
             <option value="">-- Município --</option>
             {MUNICIPIOS_LUANDA.map(m => <option key={m} value={m}>{m}</option>)}
           </select>
-          <input value={bairro} onChange={e => setBairro(e.target.value)} placeholder="Bairro" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', marginBottom: '8px', boxSizing: 'border-box' }} />
-          <input value={rua} onChange={e => setRua(e.target.value)} placeholder="Rua / Referência" style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', boxSizing: 'border-box' }} />
-        </div>
-
-        {/* Seleccionar contentor */}
-        <div style={{ background: 'white', borderRadius: '12px', padding: '16px', marginBottom: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-          <label style={{ display: 'block', fontSize: '13px', fontWeight: '600', color: '#1e293b', marginBottom: '10px' }}>
-            🗑️ Seleccione o contentor
-          </label>
-          <select value={contentorSeleccionado} onChange={e => setContentorSeleccionado(e.target.value)} style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', background: 'white', boxSizing: 'border-box' }}>
-            <option value="">-- Escolha um contentor --</option>
-            {contentores.map(c => <option key={c.id} value={c.id}>{c.nome} — {c.estado}</option>)}
-          </select>
+         <input value={bairro} onChange={e => setBairro(e.target.value)} placeholder="Ex: Bairro Operário" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid #e2e8f0', fontSize: '15px', marginBottom: '10px', boxSizing: 'border-box', color: '#1e293b' }} />
+          <input value={rua} onChange={e => setRua(e.target.value)} placeholder="Ex: Rua da Independência, nº 45" style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '2px solid #e2e8f0', fontSize: '15px', boxSizing: 'border-box', color: '#1e293b' }} />
         </div>
 
         {/* Tirar foto directamente da câmera */}
