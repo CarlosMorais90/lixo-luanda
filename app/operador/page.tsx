@@ -59,28 +59,24 @@ export default function PaginaOperador() {
     setErro(null)
 
     try {
-      // 1. Fazer upload da foto para o Supabase Storage
-      const nomeUnico = `${Date.now()}-${foto.name}`
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('fotos-contentores')
-        .upload(nomeUnico, foto)
+      // Converter foto para base64
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => {
+          const result = reader.result as string
+          resolve(result)
+        }
+        reader.onerror = reject
+        reader.readAsDataURL(foto)
+      })
 
-      if (uploadError) throw uploadError
-
-      // 2. Obter o URL público da foto
-      const { data: urlData } = supabase.storage
-        .from('fotos-contentores')
-        .getPublicUrl(nomeUnico)
-
-      const fotoUrl = urlData.publicUrl
-
-      // 3. Enviar para a API de análise
+      // Enviar para a API de análise como base64
       const resposta = await fetch('/api/analisar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           contentor_id: contentorSeleccionado,
-          foto_url: fotoUrl
+          foto_base64: base64
         })
       })
 
