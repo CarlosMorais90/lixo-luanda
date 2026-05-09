@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { User } from '@supabase/supabase-js'
 import { createSupabaseBrowser } from './supabase'
 
 interface Perfil {
@@ -13,7 +12,7 @@ interface Perfil {
 }
 
 interface AuthContextType {
-  utilizador: User | null
+  utilizador: any
   perfil: Perfil | null
   carregando: boolean
   logout: () => Promise<void>
@@ -27,16 +26,15 @@ const AuthContext = createContext<AuthContextType>({
 })
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [utilizador, setUtilizador] = useState<User | null>(null)
+  const [utilizador, setUtilizador] = useState<any>(null)
   const [perfil, setPerfil] = useState<Perfil | null>(null)
   const [carregando, setCarregando] = useState(true)
 
   useEffect(() => {
     const supabase = createSupabaseBrowser()
 
-    // Verificar sessão actual
-    supabase.auth.getSession().then(({ data }: { data: { session: any } }) => {
-      const session = data.session
+    supabase.auth.getSession().then((response: any) => {
+      const session = response?.data?.session
       if (session?.user) {
         setUtilizador(session.user)
         supabase
@@ -44,8 +42,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           .select('*')
           .eq('id', session.user.id)
           .single()
-          .then(({ data }) => {
-            if (data) setPerfil(data)
+          .then((perfilResponse: any) => {
+            if (perfilResponse?.data) setPerfil(perfilResponse.data)
             setCarregando(false)
           })
       } else {
@@ -53,17 +51,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     })
 
-    // Ouvir mudanças de autenticação
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (event, session) => {
+      async (event: any, session: any) => {
         if (session?.user) {
           setUtilizador(session.user)
-          const { data } = await supabase
+          const perfilResponse: any = await supabase
             .from('perfis')
             .select('*')
             .eq('id', session.user.id)
             .single()
-          if (data) setPerfil(data)
+          if (perfilResponse?.data) setPerfil(perfilResponse.data)
         } else {
           setUtilizador(null)
           setPerfil(null)
