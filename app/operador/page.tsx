@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createSupabaseBrowser } from '@/lib/supabase'
 
 interface Contentor {
@@ -29,15 +29,16 @@ export default function PaginaOperador() {
   const supabase = createSupabaseBrowser()
 
   // Carregar contentores
-  useState(() => {
-    supabase
-      .from('contentores')
-      .select('id, nome, estado')
-      .then(({ data }: { data: Contentor[] | null }) => {
-        if (data) setContentores(data)
+  // Carregar contentores
+  useEffect(() => {
+    fetch('/api/contentores')
+      .then(res => res.json())
+      .then(dados => {
+        if (dados.sucesso) setContentores(dados.dados)
         setCarregandoContentores(false)
       })
-  })
+      .catch(() => setCarregandoContentores(false))
+  }, [])
 
   const selecionarFoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const ficheiro = e.target.files?.[0]
