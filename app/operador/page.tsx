@@ -2,7 +2,6 @@
 
 import { useState, useRef } from 'react'
 import { createSupabaseBrowser } from '@/lib/supabase'
-import ProtegerPagina from '@/components/ProtegerPagina'
 
 interface Contentor {
   id: string
@@ -119,7 +118,7 @@ export default function PaginaOperador() {
   }
 
   return (
-    <ProtegerPagina perfisPermitidos={['operador', 'gestor', 'chefe']}>
+    <>
       <main style={{
         minHeight: '100vh',
         background: '#f1f5f9',
@@ -336,6 +335,6 @@ export default function PaginaOperador() {
           )}
         </div>
       </main>
-    </ProtegerPagina>
+    </>
   )
 }
