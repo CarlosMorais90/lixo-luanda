@@ -34,7 +34,7 @@ export default function PaginaOperador() {
     supabase
       .from('contentores')
       .select('id, nome, estado')
-      .then(({ data }) => {
+      .then(({ data }: { data: Contentor[] | null }) => {
         if (data) setContentores(data)
         setCarregandoContentores(false)
       })
