@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       messages: [
         {
           role: 'system',
-          content: `És um sistema de avaliação de desempenho de camionistas de recolha de lixo em Luanda, Angola. Responde SEMPRE apenas com JSON válido, sem texto adicional.`
+          content: `És um sistema de avaliação de desempenho de camionistas de Luanda Limpaem Luanda, Angola. Responde SEMPRE apenas com JSON válido, sem texto adicional.`
         },
         {
           role: 'user',

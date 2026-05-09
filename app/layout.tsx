@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Recolha de Lixo — Luanda',
-  description: 'Sistema inteligente de gestão de recolha de lixo em Luanda, Angola',
+  title: 'Luanda Limpa',
+  description: 'Sistema inteligente de gestão de resíduos urbanos — Luanda, Angola',
 }
 
 export default function RootLayout({

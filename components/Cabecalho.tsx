@@ -32,10 +32,10 @@ export default function Cabecalho() {
         <span style={{ fontSize: '24px' }}>🗺️</span>
         <div>
           <div style={{ fontWeight: '700', fontSize: '16px' }}>
-            Recolha de Lixo — Luanda
+            Luanda Limpa— Luanda
           </div>
           <div style={{ fontSize: '11px', opacity: 0.8 }}>
-            Sistema de Gestão Municipal
+            Gestão inteligente de resíduos urbanos
           </div>
         </div>
       </div>

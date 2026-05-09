@@ -128,7 +128,7 @@ export default function PaginaChefe() {
             📊 Relatórios — Chefe de Operações
           </h1>
           <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.7 }}>
-            Sistema de Recolha de Lixo — Luanda
+            Luanda Limpa — Gestão Municipal— Luanda
           </p>
         </div>
         <button

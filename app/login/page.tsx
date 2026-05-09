@@ -55,7 +55,7 @@ export default function PaginaLogin() {
         <div style={{ textAlign: 'center', marginBottom: '32px' }}>
           <div style={{ fontSize: '48px', marginBottom: '12px' }}>🗺️</div>
           <h1 style={{ margin: 0, fontSize: '22px', fontWeight: '700', color: '#1e293b' }}>
-            Recolha de Lixo — Luanda
+            Luanda Limpa— Luanda
           </h1>
           <p style={{ margin: '8px 0 0', fontSize: '14px', color: '#64748b' }}>
             Entre na sua conta para continuar
@@ -130,7 +130,7 @@ export default function PaginaLogin() {
           textAlign: 'center', marginTop: '24px',
           fontSize: '12px', color: '#94a3b8'
         }}>
-          Sistema de Gestão Municipal — Luanda, Angola
+          Gestão inteligente de resíduos urbanos — Luanda, Angola
         </p>
       </div>
     </main>

@@ -106,7 +106,7 @@ export default function PaginaCamionista() {
           🚛 Rota de Recolha
         </h1>
         <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.85 }}>
-          Sistema de Recolha de Lixo — Luanda
+          Luanda Limpa — Gestão Municipal— Luanda
         </p>
       </header>
 

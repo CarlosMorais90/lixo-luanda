@@ -27,7 +27,7 @@ export async function GET() {
       messages: [
         {
           role: 'system',
-          content: `És um sistema de optimização de rotas de recolha de lixo em Luanda, Angola. 
+          content: `És um sistema de optimização de rotas de Luanda Limpaem Luanda, Angola. 
           O teu objectivo é calcular a rota mais eficiente para recolher lixo nos contentores críticos.
           Responde SEMPRE apenas com JSON válido, sem texto adicional.`
         },
