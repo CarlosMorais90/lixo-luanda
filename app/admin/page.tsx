@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { createSupabaseBrowser } from '@/lib/supabase'
+import VerificarAuth from '@/components/VerificarAuth'
 
 interface Funcionario {
   id: string
@@ -142,6 +143,7 @@ export default function PaginaAdmin() {
   }
 
   return (
+    <VerificarAuth>
     <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif' }}>
       {/* Cabeçalho */}
       <header style={{ background: '#1e293b', color: 'white', padding: '16px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -250,5 +252,6 @@ export default function PaginaAdmin() {
         )}
       </div>
     </main>
+    </VerificarAuth>
   )
 }

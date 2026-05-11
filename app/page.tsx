@@ -2,8 +2,7 @@
 
 import MudarPassword from '@/components/MudarPassword'
 import Cabecalho from '@/components/Cabecalho'
-import ProtegerPagina from '@/components/ProtegerPagina'
-import { useAuth } from '@/lib/auth'
+import VerificarAuth from '@/components/VerificarAuth'
 import { useEffect, useState } from 'react'
 import { Contentor } from '@/lib/types'
 import Estatisticas from '@/components/Estatisticas'
@@ -43,7 +42,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <>
+    <VerificarAuth>
     <main style={{
       minHeight: '100vh',
       background: '#f8fafc',
@@ -190,11 +189,11 @@ export default function Dashboard() {
                 </table>
               </div>
             )}
-   <Rota />
+            <Rota />
           </>
         )}
       </div>
     </main>
-    </>
+    </VerificarAuth>
   )
 }
