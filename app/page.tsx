@@ -1,5 +1,6 @@
 'use client'
 
+import MudarPassword from '@/components/MudarPassword'
 import Cabecalho from '@/components/Cabecalho'
 import ProtegerPagina from '@/components/ProtegerPagina'
 import { useAuth } from '@/lib/auth'
@@ -104,6 +105,7 @@ export default function Dashboard() {
                 <h2 style={{ margin: 0, fontSize: '18px', color: '#1e293b' }}>
                   📍 Mapa de Contentores
                 </h2>
+                <MudarPassword />
                 <button
                   onClick={buscarContentores}
                   style={{

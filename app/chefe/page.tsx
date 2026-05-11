@@ -1,7 +1,7 @@
 'use client'
 
+import MudarPassword from '@/components/MudarPassword'
 import { notificarAvaliacaoPronta } from '@/lib/notificacoes'
-import ProtegerPagina from '@/components/ProtegerPagina'
 import { useEffect, useState } from 'react'
 
 interface Avaliacao {
@@ -101,7 +101,7 @@ export default function PaginaChefe() {
     : 0
 
  return (
-    <>
+    
     <main style={{
       minHeight: '100vh',
       background: '#f1f5f9',
@@ -143,10 +143,11 @@ export default function PaginaChefe() {
             fontSize: '13px'
           }}
         >
+
           🔄 Actualizar
         </button>
+        <MudarPassword />
       </header>
-
       <div style={{ padding: '32px', maxWidth: '1000px', margin: '0 auto' }}>
 
         {/* Cartões de resumo */}
@@ -390,7 +391,6 @@ export default function PaginaChefe() {
           )
         })}
       </div>
-   </main>
-    </>
+  </main>
   )
 }
