@@ -125,7 +125,7 @@ export default function PaginaCamionista() {
   const percentagem = totalParagens > 0 ? Math.round((totalRecolhidas / totalParagens) * 100) : 0
 
   return (
-    <VerificarAuth perfisPermitidos={['camionista']}>
+    <VerificarAuth perfisPermitidos={['camionista', 'gestor']}>
     <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif', maxWidth: '480px', margin: '0 auto' }}>
       <nav style={{ background: '#14532d', padding: '10px 20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
         <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📊 Dashboard</a>

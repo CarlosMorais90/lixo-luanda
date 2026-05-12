@@ -67,33 +67,19 @@ export default function PaginaAdmin() {
     try {
       const passwordTemp = gerarPassword()
 
-      // Criar utilizador no Supabase Auth
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
-        password: passwordTemp
+      // Usar API route no servidor para criar o utilizador
+      const resposta = await fetch('/api/registar-funcionario', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome, email, perfil, municipio, telefone, passwordTemp
+        })
       })
 
-      if (authError) throw new Error(authError.message)
-      if (!authData.user) throw new Error('Erro ao criar utilizador')
+      const resultado = await resposta.json()
+      if (!resultado.sucesso) throw new Error(resultado.erro)
 
-      // Criar perfil
-      const { error: perfilError } = await supabase
-        .from('perfis')
-        .insert([{
-          id: authData.user.id,
-          email,
-          nome,
-          perfil,
-          cargo: perfil === 'chefe' ? 'Chefe Municipal' : perfil === 'camionista' ? 'Camionista' : 'Operador de Campo',
-          municipio,
-          telefone,
-          password_temp: passwordTemp,
-          estado: 'activo'
-        }])
-
-      if (perfilError) throw new Error(perfilError.message)
-
-      // Enviar email com credenciais via EmailJS
+      // Enviar email com credenciais
       await enviarEmailCredenciais(nome, email, passwordTemp, perfil, municipio)
 
       setSucesso(`Funcionário ${nome} registado com sucesso! Email enviado para ${email}`)
