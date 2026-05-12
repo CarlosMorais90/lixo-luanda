@@ -3,17 +3,42 @@
 import { useEffect, useState } from 'react'
 import { createSupabaseBrowser } from '@/lib/supabase'
 
-export default function VerificarAuth({ children }: { children: React.ReactNode }) {
+interface VerificarAuthProps {
+  children: React.ReactNode
+  perfisPermitidos?: string[]
+}
+
+export default function VerificarAuth({ children, perfisPermitidos }: VerificarAuthProps) {
   const [verificado, setVerificado] = useState(false)
 
   useEffect(() => {
     const verificar = async () => {
       const supabase = createSupabaseBrowser()
       const { data: { session } } = await supabase.auth.getSession()
+
       if (!session) {
         window.location.href = '/login'
         return
       }
+
+      if (perfisPermitidos && perfisPermitidos.length > 0) {
+        const { data: perfil } = await supabase
+          .from('perfis')
+          .select('perfil')
+          .eq('id', session.user.id)
+          .single()
+
+        if (!perfil || !perfisPermitidos.includes(perfil.perfil)) {
+          const destino = perfil?.perfil === 'camionista' ? '/camionista'
+            : perfil?.perfil === 'operador' ? '/operador'
+            : perfil?.perfil === 'chefe' ? '/chefe'
+            : perfil?.perfil === 'gestor' ? '/admin'
+            : '/login'
+          window.location.href = destino
+          return
+        }
+      }
+
       setVerificado(true)
     }
     verificar()

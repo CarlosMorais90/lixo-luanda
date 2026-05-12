@@ -42,7 +42,7 @@ export default function Dashboard() {
   }, [])
 
   return (
-    <VerificarAuth>
+    <VerificarAuth perfisPermitidos={['gestor', 'chefe']}>
     <main style={{
       minHeight: '100vh',
       background: '#f8fafc',

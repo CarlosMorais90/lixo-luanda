@@ -143,7 +143,7 @@ export default function PaginaAdmin() {
   }
 
   return (
-    <VerificarAuth>
+    <VerificarAuth perfisPermitidos={['gestor']}>
     <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif' }}>
       {/* Cabeçalho */}
       <header style={{ background: '#1e293b', color: 'white', padding: '16px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>

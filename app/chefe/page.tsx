@@ -102,7 +102,7 @@ export default function PaginaChefe() {
     : 0
 
   return (
-    <VerificarAuth>
+    <VerificarAuth perfisPermitidos={['chefe']}>
     <main style={{
       minHeight: '100vh',
       background: '#f1f5f9',
