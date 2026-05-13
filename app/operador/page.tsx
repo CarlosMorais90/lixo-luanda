@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import VerificarAuth from '@/components/VerificarAuth'
+import ProtegerComLogin from '@/components/ProtegerComLogin'
 const MUN = ['Belas','Cacuaco','Cazenga','Icolo e Bengo','Kilamba Kiaxi','Luanda','Maianga','Quissama','Rangel','Samba','Sambizanga','Talatona','Viana']
 export default function PaginaOperador() {
   const [foto, setFoto] = useState<File | null>(null)
@@ -37,7 +37,7 @@ export default function PaginaOperador() {
   const cor = (e: string) => e === 'cheio' ? '#dc2626' : e === 'quase_cheio' ? '#f97316' : '#16a34a'
   const bg = (e: string) => e === 'cheio' ? '#fef2f2' : e === 'quase_cheio' ? '#fff7ed' : '#f0fdf4'
   return (
-    <VerificarAuth perfisPermitidos={['operador']}>
+    <ProtegerComLogin perfisPermitidos={['operador', 'gestor']} caminhoLogin="/operador/login">
     <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif', maxWidth: '480px', margin: '0 auto' }}>
       <nav style={{ background: '#92400e', padding: '10px 20px', display: 'flex', gap: '8px' }}>
         <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📊 Dashboard</a>

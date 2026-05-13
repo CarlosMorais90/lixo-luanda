@@ -171,31 +171,31 @@ export default function PaginaAdmin() {
             <h3 style={{ margin: '0 0 20px', color: '#1e293b' }}>Novo funcionário</h3>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>Nome completo *</label>
-                <input value={nome} onChange={e => setNome(e.target.value)} placeholder="Ex: João Manuel Silva" style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', boxSizing: 'border-box' }} />
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Nome completo *</label>
+                <input value={nome} onChange={e => setNome(e.target.value)} placeholder="Ex: João Manuel Silva" style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', boxSizing: 'border-box', background: '#f8fafc', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>Email *</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email@exemplo.com" style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', boxSizing: 'border-box' }} />
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Email *</label>
+                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email@exemplo.com" style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', boxSizing: 'border-box', background: '#f8fafc', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'} />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>Função *</label>
-                <select value={perfil} onChange={e => setPerfil(e.target.value as any)} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', background: 'white', boxSizing: 'border-box' }}>
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Função *</label>
+                <select value={perfil} onChange={e => setPerfil(e.target.value as any)} style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', background: '#f8fafc', boxSizing: 'border-box', cursor: 'pointer', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'}>
                   <option value="chefe">👔 Chefe Municipal</option>
                   <option value="camionista">🚛 Camionista</option>
                   <option value="operador">📷 Operador de Campo</option>
                 </select>
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>Município *</label>
-                <select value={municipio} onChange={e => setMunicipio(e.target.value)} style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', background: 'white', boxSizing: 'border-box' }}>
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Município *</label>
+                <select value={municipio} onChange={e => setMunicipio(e.target.value)} style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', background: '#f8fafc', boxSizing: 'border-box', cursor: 'pointer', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'}>
                   <option value="">-- Seleccione o município --</option>
                   {MUNICIPIOS_LUANDA.map(m => <option key={m} value={m}>{m}</option>)}
                 </select>
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '500', color: '#374151', marginBottom: '6px' }}>Telefone</label>
-                <input value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="Ex: +244 923 000 000" style={{ width: '100%', padding: '10px 14px', borderRadius: '8px', border: '1px solid #d1d5db', fontSize: '14px', boxSizing: 'border-box' }} />
+                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Telefone</label>
+                <input value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="Ex: +244 923 000 000" style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', boxSizing: 'border-box', background: '#f8fafc', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'} />
               </div>
             </div>
             <div style={{ marginTop: '20px', padding: '12px 16px', background: '#eff6ff', borderRadius: '8px', fontSize: '13px', color: '#1e40af' }}>

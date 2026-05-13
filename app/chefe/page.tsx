@@ -1,7 +1,7 @@
 'use client'
 
 import MudarPassword from '@/components/MudarPassword'
-import VerificarAuth from '@/components/VerificarAuth'
+import ProtegerComLogin from '@/components/ProtegerComLogin'
 import { notificarAvaliacaoPronta } from '@/lib/notificacoes'
 import { useEffect, useState } from 'react'
 
@@ -102,7 +102,7 @@ export default function PaginaChefe() {
     : 0
 
   return (
-    <VerificarAuth perfisPermitidos={['chefe']}>
+    <ProtegerComLogin perfisPermitidos={['chefe']} caminhoLogin="/chefe/login">
     <main style={{
       minHeight: '100vh',
       background: '#f1f5f9',
