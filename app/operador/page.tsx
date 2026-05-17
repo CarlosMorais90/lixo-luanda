@@ -1,4 +1,6 @@
 'use client'
+
+import VerificarAuth from '@/components/VerificarAuth'
 import { useState, useEffect, useRef } from 'react'
 import ProtegerComLogin from '@/components/ProtegerComLogin'
 const MUN = ['Belas','Cacuaco','Cazenga','Icolo e Bengo','Kilamba Kiaxi','Luanda','Maianga','Quissama','Rangel','Samba','Sambizanga','Talatona','Viana']
