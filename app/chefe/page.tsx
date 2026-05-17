@@ -1,5 +1,6 @@
 'use client'
 
+import VerificarAuth from '@/components/VerificarAuth'
 import MudarPassword from '@/components/MudarPassword'
 import ProtegerComLogin from '@/components/ProtegerComLogin'
 import { notificarAvaliacaoPronta } from '@/lib/notificacoes'
