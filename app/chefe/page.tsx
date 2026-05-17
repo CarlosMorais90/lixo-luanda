@@ -102,7 +102,7 @@ export default function PaginaChefe() {
     : 0
 
   return (
-    <ProtegerComLogin perfisPermitidos={['chefe']} caminhoLogin="/chefe/login">
+    <VerificarAuth perfisPermitidos={['chefe']}>
     <main style={{
       minHeight: '100vh',
       background: '#f1f5f9',
