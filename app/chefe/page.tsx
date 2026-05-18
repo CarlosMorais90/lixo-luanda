@@ -1,5 +1,6 @@
 'use client'
 
+import Cabecalho from '@/components/Cabecalho'
 import VerificarAuth from '@/components/VerificarAuth'
 import MudarPassword from '@/components/MudarPassword'
 import ProtegerComLogin from '@/components/ProtegerComLogin'
@@ -106,25 +107,15 @@ export default function PaginaChefe() {
     <VerificarAuth perfisPermitidos={['chefe']}>
     <main style={{
       minHeight: '100vh',
-      background: '#f1f5f9',
+      background: '#f8fafc',
       fontFamily: 'system-ui, sans-serif'
     }}>
       {/* Cabeçalho */}
-      <nav style={{ background: '#0f172a', padding: '10px 32px', display: 'flex', gap: '12px' }}>
-        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📊 Dashboard</a>
-        <a href="/operador" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📷 Operador</a>
-        <a href="/camionista" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>🚛 Camionista</a>
-        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📋 Chefe</a>
-      </nav>
-      <header style={{
-        background: '#1e293b',
-        color: 'white',
-        padding: '16px 32px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.2)'
-      }}>
+      <Cabecalho
+        titulo="Painel do Chefe de Operações"
+        subtitulo="Relatórios e avaliações de desempenho"
+        corFundo="#1e293b"
+      />
         <div>
           <h1 style={{ margin: 0, fontSize: '20px', fontWeight: '700' }}>
             📊 Relatórios — Chefe de Operações
