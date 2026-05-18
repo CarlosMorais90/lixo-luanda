@@ -1,5 +1,6 @@
 'use client'
 
+import Cabecalho from '@/components/Cabecalho'
 import { useState, useEffect } from 'react'
 import { createSupabaseBrowser } from '@/lib/supabase'
 import VerificarAuth from '@/components/VerificarAuth'
@@ -130,18 +131,12 @@ export default function PaginaAdmin() {
 
   return (
     <VerificarAuth perfisPermitidos={['gestor']}>
-    <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif' }}>
-      {/* Cabeçalho */}
-      <header style={{ background: '#1e293b', color: 'white', padding: '16px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div>
-          <h1 style={{ margin: 0, fontSize: '20px', fontWeight: '700' }}>🌿 Luanda Limpa — Painel Admin</h1>
-          <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.7 }}>Gestão de funcionários</p>
-        </div>
-        <nav style={{ display: 'flex', gap: '8px' }}>
-          <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📊 Dashboard</a>
-          <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 14px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '13px' }}>📋 Chefe</a>
-        </nav>
-      </header>
+    <main style={{ minHeight: '100vh', background: '#f8fafc', fontFamily: 'system-ui, sans-serif' }}>
+      <Cabecalho
+        titulo="Painel Admin — PCA"
+        subtitulo="Gestão de funcionários e operações"
+        corFundo="#1e293b"
+      />
 
       <div style={{ padding: '32px', maxWidth: '1000px', margin: '0 auto' }}>
 
@@ -160,7 +155,7 @@ export default function PaginaAdmin() {
         {/* Botão registar */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
           <h2 style={{ margin: 0, color: '#1e293b' }}>👥 Funcionários registados</h2>
-          <button onClick={() => setMostrarForm(!mostrarForm)} style={{ background: '#1e40af', color: 'white', border: 'none', borderRadius: '10px', padding: '12px 24px', cursor: 'pointer', fontSize: '14px', fontWeight: '600' }}>
+          <button onClick={() => setMostrarForm(!mostrarForm)} style={{ background: 'linear-gradient(135deg, #064e3b 0%, #047857 100%)', color: 'white', border: 'none', borderRadius: '10px', padding: '12px 24px', cursor: 'pointer', fontSize: '14px', fontWeight: '600', boxShadow: '0 4px 12px rgba(6,78,59,0.3)' }}>
             {mostrarForm ? '✕ Cancelar' : '➕ Registar funcionário'}
           </button>
         </div>
