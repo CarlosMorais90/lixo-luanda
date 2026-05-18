@@ -161,47 +161,98 @@ export default function PaginaAdmin() {
         </div>
 
         {/* Formulário de registo */}
-        {mostrarForm && (
-          <div style={{ background: 'white', borderRadius: '16px', padding: '24px', marginBottom: '24px', boxShadow: '0 1px 4px rgba(0,0,0,0.08)' }}>
-            <h3 style={{ margin: '0 0 20px', color: '#1e293b' }}>Novo funcionário</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Nome completo *</label>
-                <input value={nome} onChange={e => setNome(e.target.value)} placeholder="Ex: João Manuel Silva" style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', boxSizing: 'border-box', background: '#f8fafc', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'} />
+       {mostrarForm && (
+            <div style={{
+              background: 'white', borderRadius: '16px',
+              padding: '28px', marginBottom: '24px',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+              border: '1px solid #d1fae5'
+            }}>
+              <h3 style={{ margin: '0 0 24px', color: '#064e3b', fontSize: '18px', fontWeight: '700' }}>
+                ➕ Novo funcionário
+              </h3>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#1e293b', marginBottom: '8px' }}>Nome completo *</label>
+                  <input
+                    value={nome}
+                    onChange={e => setNome(e.target.value)}
+                    placeholder="Ex: João Manuel Silva"
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', border: '2px solid #e2e8f0', fontSize: '15px', color: '#1e293b', boxSizing: 'border-box' as const, outline: 'none' }}
+                    onFocus={e => e.target.style.borderColor = '#064e3b'}
+                    onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#1e293b', marginBottom: '8px' }}>Email *</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="email@exemplo.com"
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', border: '2px solid #e2e8f0', fontSize: '15px', color: '#1e293b', boxSizing: 'border-box' as const, outline: 'none' }}
+                    onFocus={e => e.target.style.borderColor = '#064e3b'}
+                    onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                  />
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#1e293b', marginBottom: '8px' }}>Função *</label>
+                  <select
+                    value={perfil}
+                    onChange={e => setPerfil(e.target.value as any)}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', border: '2px solid #e2e8f0', fontSize: '15px', color: '#1e293b', background: 'white', boxSizing: 'border-box' as const, outline: 'none' }}
+                    onFocus={e => e.target.style.borderColor = '#064e3b'}
+                    onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                  >
+                    <option value="chefe">👔 Chefe Municipal</option>
+                    <option value="camionista">🚛 Camionista</option>
+                    <option value="operador">📷 Operador de Campo</option>
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#1e293b', marginBottom: '8px' }}>Município *</label>
+                  <select
+                    value={municipio}
+                    onChange={e => setMunicipio(e.target.value)}
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', border: '2px solid #e2e8f0', fontSize: '15px', color: '#1e293b', background: 'white', boxSizing: 'border-box' as const, outline: 'none' }}
+                    onFocus={e => e.target.style.borderColor = '#064e3b'}
+                    onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                  >
+                    <option value="">-- Seleccione o município --</option>
+                    {MUNICIPIOS_LUANDA.map(m => <option key={m} value={m}>{m}</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: '14px', fontWeight: '600', color: '#1e293b', marginBottom: '8px' }}>Telefone</label>
+                  <input
+                    value={telefone}
+                    onChange={e => setTelefone(e.target.value)}
+                    placeholder="+244 923 000 000"
+                    style={{ width: '100%', padding: '12px 16px', borderRadius: '10px', border: '2px solid #e2e8f0', fontSize: '15px', color: '#1e293b', boxSizing: 'border-box' as const, outline: 'none' }}
+                    onFocus={e => e.target.style.borderColor = '#064e3b'}
+                    onBlur={e => e.target.style.borderColor = '#e2e8f0'}
+                  />
+                </div>
               </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Email *</label>
-                <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="email@exemplo.com" style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', boxSizing: 'border-box', background: '#f8fafc', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'} />
+              <div style={{ marginTop: '20px', padding: '14px 16px', background: '#f0fdf4', borderRadius: '10px', fontSize: '14px', color: '#064e3b', border: '1px solid #d1fae5' }}>
+                📧 Um email será enviado automaticamente ao funcionário com as credenciais de acesso e o link do seu painel.
               </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Função *</label>
-                <select value={perfil} onChange={e => setPerfil(e.target.value as any)} style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', background: '#f8fafc', boxSizing: 'border-box', cursor: 'pointer', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'}>
-                  <option value="chefe">👔 Chefe Municipal</option>
-                  <option value="camionista">🚛 Camionista</option>
-                  <option value="operador">📷 Operador de Campo</option>
-                </select>
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Município *</label>
-                <select value={municipio} onChange={e => setMunicipio(e.target.value)} style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', background: '#f8fafc', boxSizing: 'border-box', cursor: 'pointer', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'}>
-                  <option value="">-- Seleccione o município --</option>
-                  {MUNICIPIOS_LUANDA.map(m => <option key={m} value={m}>{m}</option>)}
-                </select>
-              </div>
-              <div>
-                <label style={{ display: 'block', fontSize: '13px', fontWeight: '700', color: '#1e293b', marginBottom: '8px' }}>Telefone</label>
-                <input value={telefone} onChange={e => setTelefone(e.target.value)} placeholder="Ex: +244 923 000 000" style={{ width: '100%', padding: '12px 14px', borderRadius: '8px', border: '2px solid #cbd5e1', fontSize: '14px', boxSizing: 'border-box', background: '#f8fafc', transition: 'border-color 0.2s' }} onFocus={e => e.target.style.borderColor = '#1e40af'} onBlur={e => e.target.style.borderColor = '#cbd5e1'} />
-              </div>
+              <button
+                onClick={registarFuncionario}
+                disabled={enviando}
+                style={{
+                  marginTop: '20px',
+                  background: enviando ? '#94a3b8' : 'linear-gradient(135deg, #064e3b 0%, #047857 100%)',
+                  color: 'white', border: 'none', borderRadius: '10px',
+                  padding: '14px 28px', cursor: enviando ? 'not-allowed' : 'pointer',
+                  fontSize: '15px', fontWeight: '700',
+                  boxShadow: enviando ? 'none' : '0 4px 12px rgba(6,78,59,0.3)'
+                }}
+              >
+                {enviando ? '⏳ A registar...' : '✅ Registar e enviar email'}
+              </button>
             </div>
-            <div style={{ marginTop: '20px', padding: '12px 16px', background: '#eff6ff', borderRadius: '8px', fontSize: '13px', color: '#1e40af' }}>
-              📧 Um email será enviado automaticamente ao funcionário com as credenciais de acesso e o link do seu painel.
-            </div>
-            <button onClick={registarFuncionario} disabled={enviando} style={{ marginTop: '16px', background: enviando ? '#94a3b8' : '#15803d', color: 'white', border: 'none', borderRadius: '10px', padding: '12px 28px', cursor: enviando ? 'not-allowed' : 'pointer', fontSize: '15px', fontWeight: '600' }}>
-              {enviando ? '⏳ A registar...' : '✅ Registar e enviar email'}
-            </button>
-          </div>
-        )}
-
+          )}
         {/* Lista de funcionários */}
         {carregando ? (
           <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>⏳ A carregar...</div>
