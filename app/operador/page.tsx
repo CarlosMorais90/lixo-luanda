@@ -1,5 +1,6 @@
 'use client'
 
+import Cabecalho from '@/components/Cabecalho'
 import VerificarAuth from '@/components/VerificarAuth'
 import { useState, useEffect, useRef } from 'react'
 import ProtegerComLogin from '@/components/ProtegerComLogin'
@@ -40,17 +41,11 @@ export default function PaginaOperador() {
   const bg = (e: string) => e === 'cheio' ? '#fef2f2' : e === 'quase_cheio' ? '#fff7ed' : '#f0fdf4'
   return (
     <VerificarAuth perfisPermitidos={['operador']}>
-    <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif', maxWidth: '480px', margin: '0 auto' }}>
-      <nav style={{ background: '#92400e', padding: '10px 20px', display: 'flex', gap: '8px' }}>
-        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📊 Dashboard</a>
-        <a href="/camionista" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>🚛 Camionista</a>
-        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📋 Chefe</a>
-      </nav>
-      <header style={{ background: '#d97706', color: 'white', padding: '16px 20px' }}>
-        <h1 style={{ margin: 0, fontSize: '18px', fontWeight: '700' }}>📷 Análise de Contentor</h1>
-        <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.85 }}>Luanda Limpa — Operador de Campo</p>
-        <div style={{ marginTop: '8px', background: 'rgba(0,0,0,0.2)', borderRadius: '6px', padding: '6px 10px', fontSize: '13px' }}>🕐 {hora}</div>
-      </header>
+    <Cabecalho
+        titulo="Análise de Contentor"
+        subtitulo="Luanda Limpa — Operador de Campo"
+        corFundo="#d97706"
+      />
       <div style={{ padding: '16px' }}>
         <div style={{ background: 'white', borderRadius: '12px', padding: '16px', marginBottom: '12px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
           <label style={{ display: 'block', fontSize: '14px', fontWeight: '700', color: '#1e293b', marginBottom: '12px' }}>📍 Localização do contentor</label>

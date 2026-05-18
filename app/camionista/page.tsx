@@ -1,5 +1,6 @@
 'use client'
 
+import Cabecalho from '@/components/Cabecalho'
 import { useState, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import ProtegerComLogin from '@/components/ProtegerComLogin'
@@ -127,16 +128,11 @@ export default function PaginaCamionista() {
   return (
     <ProtegerComLogin perfisPermitidos={['camionista', 'gestor']} caminhoLogin="/camionista/login">
     <main style={{ minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, sans-serif', maxWidth: '480px', margin: '0 auto' }}>
-      <nav style={{ background: '#14532d', padding: '10px 20px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-        <a href="/" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📊 Dashboard</a>
-        <a href="/operador" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📷 Operador</a>
-        <a href="/chefe" style={{ color: 'white', textDecoration: 'none', padding: '6px 12px', background: 'rgba(255,255,255,0.15)', borderRadius: '8px', fontSize: '12px' }}>📋 Chefe</a>
-      </nav>
-
-      <header style={{ background: '#15803d', color: 'white', padding: '16px 20px', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}>
-        <h1 style={{ margin: 0, fontSize: '18px', fontWeight: '700' }}>🚛 Rota de Recolha</h1>
-        <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.85 }}>Luanda Limpa — Camionista</p>
-      </header>
+      <Cabecalho
+        titulo="Rota de Recolha"
+        subtitulo="Luanda Limpa — Camionista"
+        corFundo="#15803d"
+      />
 
       <div style={{ padding: '16px' }}>
 
