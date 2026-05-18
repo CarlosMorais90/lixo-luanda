@@ -39,8 +39,9 @@ export default function PaginaOperador() {
   }
   const cor = (e: string) => e === 'cheio' ? '#dc2626' : e === 'quase_cheio' ? '#f97316' : '#16a34a'
   const bg = (e: string) => e === 'cheio' ? '#fef2f2' : e === 'quase_cheio' ? '#fff7ed' : '#f0fdf4'
-  return (
+ return (
     <VerificarAuth perfisPermitidos={['operador']}>
+    <main style={{ minHeight: '100vh', background: '#f1f5f9',
     <Cabecalho
         titulo="Análise de Contentor"
         subtitulo="Luanda Limpa — Operador de Campo"
