@@ -116,7 +116,7 @@ export default function PaginaChefe() {
         subtitulo="Relatórios e avaliações de desempenho"
         corFundo="#1e293b"
       />
-       >
+       
       <div style={{ padding: '32px', maxWidth: '1000px', margin: '0 auto' }}>
 
         {/* Cartões de resumo */}
