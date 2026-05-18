@@ -116,31 +116,7 @@ export default function PaginaChefe() {
         subtitulo="Relatórios e avaliações de desempenho"
         corFundo="#1e293b"
       />
-        <div>
-          <h1 style={{ margin: 0, fontSize: '20px', fontWeight: '700' }}>
-            📊 Relatórios — Chefe de Operações
-          </h1>
-          <p style={{ margin: '4px 0 0', fontSize: '12px', opacity: 0.7 }}>
-            Luanda Limpa — Gestão Municipal— Luanda
-          </p>
-        </div>
-        <button
-          onClick={buscarRotas}
-          style={{
-            background: 'rgba(255,255,255,0.1)',
-            color: 'white',
-            border: '1px solid rgba(255,255,255,0.2)',
-            borderRadius: '8px',
-            padding: '8px 16px',
-            cursor: 'pointer',
-            fontSize: '13px'
-          }}
-        >
-
-          🔄 Actualizar
-        </button>
-        <MudarPassword />
-      </header>
+       >
       <div style={{ padding: '32px', maxWidth: '1000px', margin: '0 auto' }}>
 
         {/* Cartões de resumo */}
